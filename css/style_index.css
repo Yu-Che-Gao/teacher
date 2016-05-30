@@ -1,0 +1,24 @@
+/* =========================================== */
+/* 整體設定 開始                               */
+/* =========================================== */
+body {
+	background-image: url("../image/background.jpg");
+	margin:  0px;
+	padding: 0px;
+	text-align:  center;
+	line-height: 150%;
+}
+
+.title {
+	color: #0000FF;
+	font-family: Microsoft JhengHei;
+	font-size:   55px;
+	font-weight: bold;
+	text-shadow: 3px 3px 13px #FF37FD;
+}
+
+.imgBtn {
+	width:  15%;
+	height: 15%;
+	cursor: pointer;  /* 改變滑鼠游標的形狀 */
+}
