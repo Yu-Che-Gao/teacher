@@ -146,19 +146,30 @@ $hopeNumArray=['一', '二', '三', '四', '五', '六', '七', '八', '九', '�
 					echo '<td class="result" data-col="realClass"	data-row="'.$row['tid'].'" data-myrow="'.$i.'"><span>'.$row['realClass'].'</span></td>';
 					echo '<td class="tdText" data-col="exceedClass"	data-row="'.$row['tid'].'" data-myrow="'.$i.'"><span>'.$row['exceedClass'].'</span>	<input class="modify" data-col="exceedClass" data-row="'.$row['tid'].'" value="'.$row['exceedClass'].'"></td>';
 					echo '<td class="result" data-col="totalClass"	data-row="'.$row['tid'].'" data-myrow="'.$i.'">'.$row['totalClass'].'</td>';
-					// echo '<td class="tdText" data-col="hope1"		data-row="'.$row['tid'].'" data-myrow="'.$i.'"><span>'.$row['hope1'].'</span>		<input class="modify" data-col="hope1"		 data-row="'.$row['tid'].'" value="'.$row['hope1'].'"></td>';
-					// echo '<td class="tdText" data-col="hope2"		data-row="'.$row['tid'].'" data-myrow="'.$i.'"><span>'.$row['hope2'].'</span>		<input class="modify" data-col="hope2"		 data-row="'.$row['tid'].'" value="'.$row['hope2'].'"></td>';
-					// echo '<td class="tdText" data-col="hope3"		data-row="'.$row['tid'].'" data-myrow="'.$i.'"><span>'.$row['hope3'].'</span>		<input class="modify" data-col="hope3"		 data-row="'.$row['tid'].'" value="'.$row['hope3'].'"></td>';
-					// echo '<td class="tdText" data-col="hope4"		data-row="'.$row['tid'].'" data-myrow="'.$i.'"><span>'.$row['hope4'].'</span>		<input class="modify" data-col="hope4"		 data-row="'.$row['tid'].'" value="'.$row['hope4'].'"></td>';
-					// echo '<td class="tdText" data-col="hope5"		data-row="'.$row['tid'].'" data-myrow="'.$i.'"><span>'.$row['hope5'].'</span>		<input class="modify" data-col="hope5"		 data-row="'.$row['tid'].'" value="'.$row['hope5'].'"></td>';
-					echo '<td><button class="btnBlue_small">點擊查看</button></td>';
+					echo '<td><button class="btnBlue_small showToggle">點擊查看</button></td>';
 					echo '<td><button class="btnBlue_small" id="'.$row['tid'].'" onclick="deleteSurveyInfo(this.id)">刪除</button></td>';
 					echo '<td><input type="checkbox" name="checksurvey[]" value="'.$row['tid'].'" style="width:20px; height:20px;"/></td>';
 					echo '</tr>';
 					
-					//意願
+					//15個意願欄位
+					echo '<tr id="hopeRow'.$i.'"><td colspan="7" style="text-align:center;">';
+					for($j=0; $j<count($hopeNumArray)/5; $j++) {
+						echo '<table id="t01" class="hopeRowArray" style="width:90%;margin:0 auto;table-layout: fixed;">';
+						echo '<tr>';
+						for($k=0; $k<5; $k++) {
+							echo '<th>意願'.$hopeNumArray[$j*5+$k].'</th>';
+						}
+						echo '</tr>';
+						echo '<tr>';
+						for($k=0; $k<5; $k++) {
+							echo '<td class="tdText" data-col="hope'.($j*5+$k+1).'" data-row="'.$row['tid'].'" data-myrow="'.$i.'"><span>'.$row['hope'.($j*5+$k+1)].'</span><input class="modify" data-col="hope'.($j*5+$k+1).'" data-row="'.$row['tid'].'" value="'.$row['hope'.($j*5+$k+1)].'"></td>';
+						}
+						echo '</tr>';
+						echo '</table>';
+					}
 					
-					$i = $i + 1;
+					echo '</td></tr>';
+					$i++;
 				}
 				?>
 			</table>
@@ -198,6 +209,7 @@ $hopeNumArray=['一', '二', '三', '四', '五', '六', '七', '八', '九', '�
 	<?php show_popup_alert_admin(); /* 自訂提醒視窗 */ ?>
 	
 	<script>
+		objectInit(); //物件初始化
 		// 即時修改
 		for(let i=0;i<document.getElementsByClassName('tdText').length;i++){
 			document.getElementsByClassName('tdText')[i].addEventListener('click',function(){
@@ -267,6 +279,23 @@ $hopeNumArray=['一', '二', '三', '四', '五', '六', '七', '八', '九', '�
                 modal.style.display = "none";
             }
         }
+		
+		
+		
+		document.getElementsByClassName('showToggle')[0].toggle();
+		
+		function objectInit() {
+			Object.prototype.toggle=function() {
+			this.addEventListener('click', function(){
+					if(this.style.display=='block') {
+						this.style.display='none';
+					} else {
+						this.style.display='block';
+					}
+				});
+				
+			}
+		}
 	</script>
 	<script src="../js/surveymanage.js"></script>
 </body>
