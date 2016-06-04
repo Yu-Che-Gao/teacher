@@ -58,7 +58,8 @@
 					<option>綜合活動		</option>
 					<option>社會			</option>
 					<option>自然與生活科技	</option>
-					<option>生活			</option>
+					<option>生活A			</option>
+					<option>生活B			</option>
 					<option>音樂			</option>
 					<option>美勞表演		</option>
 					<option>健康			</option>
@@ -68,23 +69,24 @@
 					<option>英語			</option>
 				';
 				?>
-				
-				<table style="width:100%; text-align:center;">
-					<tr>
-						<th>意願一</th>
-						<th>意願二</th>
-						<th>意願三</th>
-						<th>意願四</th>
-						<th>意願五</th>
-					</tr>
-					<tr>
-						<td><select name="subject1"><?php echo $subject; ?></select></td>
-						<td><select name="subject2"><?php echo $subject; ?></select></td>
-						<td><select name="subject3"><?php echo $subject; ?></select></td>
-						<td><select name="subject4"><?php echo $subject; ?></select></td>
-						<td><select name="subject5"><?php echo $subject; ?></select></td>
-					</tr>
-				</table>
+						<?php
+							$hopeNumArray=['一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一', '十二', '十三', '十四', '十五'];
+							echo '<table style="width:100%; text-align:center;">';
+							for($i=0; $i<count($hopeNumArray)/5;$i++) {
+								echo '<tr>';
+								for($j=0; $j<5; $j++){
+									echo '<th>意願'.$hopeNumArray[$i*5+$j].'</th>';
+								}
+								echo '</tr>';
+								
+								echo '<tr>';
+								for($j=0; $j<5; $j++){
+									echo '<td><select name="subject[]">'.$subject.'</select></td>';
+								}
+								echo '</tr>';
+							}
+							echo '</table>';
+						?>
 				
 				<div class="btnBlueDiv">
 					<input id="submit" type="submit" value="送出" class="btnBlue" />

@@ -3,6 +3,8 @@
 require_once("../globefunction.php");
 require_once("../mysql_connect.inc.php");
 require_once("./judge_login.php");
+$hopeNumArray=['一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一', '十二', '十三', '十四', '十五'];
+
 ?>
 <html lang="zh-TW">
 <head>
@@ -72,7 +74,7 @@ require_once("./judge_login.php");
 				</span>
 			</div>
 			
-			<div class="convertPDF">
+			<div class="convertPDFbtn">
 				<img src="../image/pdf_icon.png" title="轉存PDF檔案" class="setImg" onclick="convertPDF();"/>
 			</div>
 			<br/><br/><br/><br/>
@@ -81,40 +83,56 @@ require_once("./judge_login.php");
 		<form id="surveymanage" method="post" action="survey_info_insert.php" style="display:none;">
 			<table border="1" id="tableAdd">
 				<tr>
-					<th width="15%">教師姓名</th>
-					<th width="10%">超鐘點節數</th>
-					<th width="15%">意願一</th>
-					<th width="15%">意願二</th>
-					<th width="15%">意願三</th>
-					<th width="15%">意願四</th>
-					<th width="15%">意願五</th>
+					<th>教師姓名</th>
+					<th>超鐘點節數</th>
+					<?php
+						for($i=0; $i<count($hopeNumArray)/2-1; $i++) {
+							echo '<th>意願'.$hopeNumArray[$i].'</th>';
+						}
+					?>
 				</tr>
 				<tr>
 					<td><select name="name"  class="add"><?php echo $teacherName; ?></select></td>
 					<td><input  type="text"  class="add" name="exceedClass"/></td>
-					<td><select name="hope1" class="add"><?php echo $subject; ?></select></td>
-					<td><select name="hope2" class="add"><?php echo $subject; ?></select></td>
-					<td><select name="hope3" class="add"><?php echo $subject; ?></select></td>
-					<td><select name="hope4" class="add"><?php echo $subject; ?></select></td>
-					<td><select name="hope5" class="add"><?php echo $subject; ?></select></td>
+					<?php
+						for($i=0; $i<count($hopeNumArray)/2-1; $i++) {
+							echo '<td>';
+							echo '<select name="hope'.($i+1).'" class="add">'.$subject.'</select>';
+							echo '</td>';
+						}
+					?>
+				</tr>
+			</table>
+			<table border="1" id="tableAdd">
+				<tr>
+					<?php
+						for($i=count($hopeNumArray)/2; $i<count($hopeNumArray); $i++) {
+							echo '<th>意願'.$hopeNumArray[$i].'</th>';
+						}
+					?>
+				</tr>
+				<tr>
+					<?php
+						for($i=floor(count($hopeNumArray)/2); $i<count($hopeNumArray); $i++) {
+							echo '<td>';
+							echo '<select name="hope'.($i+1).'" class="add">'.$subject.'</select>';
+							echo '</td>';
+						}
+					?>
 				</tr>
 			</table>
 			<input type="submit" value="新增" class="btnPurple_small" style="margin-top:30px;"/>
 			<br/><br/><br/><br/><br/>
 		</form>
 		
-		<form id="convert_pdf" method="post" action="survey_convert_pdf.php" target="_blank">
+		<form id="convert_pdf" method="post" action="survey_convert_pdf.php" onsubmit="return false;" target="_blank">
 			<table border="1" id="t01">
 				<tr>
 					<th width="9%" >教師姓名</th>
 					<th width="9%" >實際配課節數</th>
 					<th width="9%" >超鐘點節數</th>
 					<th width="9%" >實際授課節數</th>
-					<th width="9%" >意願一</th>
-					<th width="9%" >意願二</th>
-					<th width="9%" >意願三</th>
-					<th width="9%" >意願四</th>
-					<th width="9%" >意願五</th>
+					<th>意願</th>
 					<th width="10%">刪除</th>
 					<th width="9%" ><input type="checkbox" name="all" onclick="check_all(this,'checksurvey[]')" style="width:15px; height:15px;">全選</th>
 				</tr>
@@ -128,14 +146,18 @@ require_once("./judge_login.php");
 					echo '<td class="result" data-col="realClass"	data-row="'.$row['tid'].'" data-myrow="'.$i.'"><span>'.$row['realClass'].'</span></td>';
 					echo '<td class="tdText" data-col="exceedClass"	data-row="'.$row['tid'].'" data-myrow="'.$i.'"><span>'.$row['exceedClass'].'</span>	<input class="modify" data-col="exceedClass" data-row="'.$row['tid'].'" value="'.$row['exceedClass'].'"></td>';
 					echo '<td class="result" data-col="totalClass"	data-row="'.$row['tid'].'" data-myrow="'.$i.'">'.$row['totalClass'].'</td>';
-					echo '<td class="tdText" data-col="hope1"		data-row="'.$row['tid'].'" data-myrow="'.$i.'"><span>'.$row['hope1'].'</span>		<input class="modify" data-col="hope1"		 data-row="'.$row['tid'].'" value="'.$row['hope1'].'"></td>';
-					echo '<td class="tdText" data-col="hope2"		data-row="'.$row['tid'].'" data-myrow="'.$i.'"><span>'.$row['hope2'].'</span>		<input class="modify" data-col="hope2"		 data-row="'.$row['tid'].'" value="'.$row['hope2'].'"></td>';
-					echo '<td class="tdText" data-col="hope3"		data-row="'.$row['tid'].'" data-myrow="'.$i.'"><span>'.$row['hope3'].'</span>		<input class="modify" data-col="hope3"		 data-row="'.$row['tid'].'" value="'.$row['hope3'].'"></td>';
-					echo '<td class="tdText" data-col="hope4"		data-row="'.$row['tid'].'" data-myrow="'.$i.'"><span>'.$row['hope4'].'</span>		<input class="modify" data-col="hope4"		 data-row="'.$row['tid'].'" value="'.$row['hope4'].'"></td>';
-					echo '<td class="tdText" data-col="hope5"		data-row="'.$row['tid'].'" data-myrow="'.$i.'"><span>'.$row['hope5'].'</span>		<input class="modify" data-col="hope5"		 data-row="'.$row['tid'].'" value="'.$row['hope5'].'"></td>';
+					// echo '<td class="tdText" data-col="hope1"		data-row="'.$row['tid'].'" data-myrow="'.$i.'"><span>'.$row['hope1'].'</span>		<input class="modify" data-col="hope1"		 data-row="'.$row['tid'].'" value="'.$row['hope1'].'"></td>';
+					// echo '<td class="tdText" data-col="hope2"		data-row="'.$row['tid'].'" data-myrow="'.$i.'"><span>'.$row['hope2'].'</span>		<input class="modify" data-col="hope2"		 data-row="'.$row['tid'].'" value="'.$row['hope2'].'"></td>';
+					// echo '<td class="tdText" data-col="hope3"		data-row="'.$row['tid'].'" data-myrow="'.$i.'"><span>'.$row['hope3'].'</span>		<input class="modify" data-col="hope3"		 data-row="'.$row['tid'].'" value="'.$row['hope3'].'"></td>';
+					// echo '<td class="tdText" data-col="hope4"		data-row="'.$row['tid'].'" data-myrow="'.$i.'"><span>'.$row['hope4'].'</span>		<input class="modify" data-col="hope4"		 data-row="'.$row['tid'].'" value="'.$row['hope4'].'"></td>';
+					// echo '<td class="tdText" data-col="hope5"		data-row="'.$row['tid'].'" data-myrow="'.$i.'"><span>'.$row['hope5'].'</span>		<input class="modify" data-col="hope5"		 data-row="'.$row['tid'].'" value="'.$row['hope5'].'"></td>';
+					echo '<td><button class="btnBlue_small">點擊查看</button></td>';
 					echo '<td><button class="btnBlue_small" id="'.$row['tid'].'" onclick="deleteSurveyInfo(this.id)">刪除</button></td>';
 					echo '<td><input type="checkbox" name="checksurvey[]" value="'.$row['tid'].'" style="width:20px; height:20px;"/></td>';
 					echo '</tr>';
+					
+					//意願
+					
 					$i = $i + 1;
 				}
 				?>

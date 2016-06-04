@@ -8,11 +8,9 @@ show_popup_alert();  /* 自訂提醒視窗 globefunction.php */
 $teacherName = $_POST['teacherName'];
 $overtime    = $_POST['overtime'];
 $overtimeNum = $_POST['overtimeNum'];
-$subject1 = $_POST['subject1'];
-$subject2 = $_POST['subject2'];
-$subject3 = $_POST['subject3'];
-$subject4 = $_POST['subject4'];
-$subject5 = $_POST['subject5'];
+
+$subject=$_POST['subject'];
+$hopeNumArray=['一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一', '十二', '十三', '十四', '十五'];
 
 if($teacherName=="")
 {	?>
@@ -40,7 +38,8 @@ else
 		if($overtime=="false")
 			$overtimeNum = 0;
 		$tid = $list['tid'];
-		$totalClass = $list['realClass'] + $overtimeNum;
+		$totalClass = $list['jobClass'] + $overtimeNum;
+		$realTotalClass = $list['realClass'] + $overtimeNum;
 	}
 }
 ?>
@@ -61,47 +60,35 @@ else
 		<div class="content" style="text-align:center;">
 			<h1 style="color:#CC00EE;"><?php echo $teacherName; ?>老師</h1>
 			<div class="showClass">
-				基本節數：<?php echo $list['jobClass']; ?>		<br/>
-				減課節數：<?php echo $list['subClass']; ?>		<br/>
-				超鐘結數：<?php echo $overtimeNum; ?>	<br/>
-				總節數：<?php echo $totalClass; ?>
+				<!-- 基本節數：<?php echo $list['jobClass']; ?>		<br/> -->
+				<!-- 減課節數：<?php echo $list['subClass']; ?>		<br/> -->
+				超鐘節數：<?php echo $overtimeNum; ?>	<br/>
+				<!-- 總節數：<?php echo $totalClass; ?> -->
 			</div>
 			
 			<table id="resultTable">
 				<tr>
 					<th colspan="2">意願科目</th>
 				</tr>
-				<tr>
-					<td width="50%">意願一</td>
-					<td width="50%"><?php echo $subject1; ?></td>
-				</tr>
-				<tr>
-					<td>意願二</td>
-					<td><?php echo $subject2; ?></td>
-				</tr>
-				<tr>
-					<td>意願三</td>
-					<td><?php echo $subject3; ?></td>
-				</tr>
-				<tr>
-					<td>意願四</td>
-					<td><?php echo $subject4; ?></td>
-				</tr>
-				<tr>
-					<td>意願五</td>
-					<td><?php echo $subject5; ?></td>
-				</tr>
+				<?php
+					for($i=0; $i<count($hopeNumArray); $i++) {
+						echo '<tr>';
+						echo '<td width="50%">意願'.$hopeNumArray[$i].'</td>';
+						echo '<td>'.$subject[$i].'</td>';
+						echo '</tr>';
+					}
+				?>
 			</table>
 			
 			<form id="teachercheck" method="post" action="teachercheck_update.php">
 				<input type="hidden" name="tid"			value="<?php echo $tid; ?>" />
 				<input type="hidden" name="exceedClass" value="<?php echo $overtimeNum; ?>" />
-				<input type="hidden" name="totalClass"  value="<?php echo $totalClass; ?>" />
-				<input type="hidden" name="subject1" 	value="<?php echo $subject1; ?>" />
-				<input type="hidden" name="subject2" 	value="<?php echo $subject2; ?>" />
-				<input type="hidden" name="subject3" 	value="<?php echo $subject3; ?>" />
-				<input type="hidden" name="subject4" 	value="<?php echo $subject4; ?>" />
-				<input type="hidden" name="subject5" 	value="<?php echo $subject5; ?>" />
+				<input type="hidden" name="totalClass"  value="<?php echo $realTotalClass; ?>" />
+				<?php
+					for($i=0; $i<count($hopeNumArray); $i++) {
+						echo '<input type="hidden" name="subject[]" value="'.$subject[$i].'" />';
+					}
+				?>
 				
 				<div class="btnBlueDiv">
 					<input type="button" value="返回修改" class="btnBlue" onclick="javascript:history.back()"/>
