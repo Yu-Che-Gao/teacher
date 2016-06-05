@@ -146,23 +146,23 @@ $hopeNumArray=['一', '二', '三', '四', '五', '六', '七', '八', '九', '�
 					echo '<td class="result" data-col="realClass"	data-row="'.$row['tid'].'" data-myrow="'.$i.'"><span>'.$row['realClass'].'</span></td>';
 					echo '<td class="tdText" data-col="exceedClass"	data-row="'.$row['tid'].'" data-myrow="'.$i.'"><span>'.$row['exceedClass'].'</span>	<input class="modify" data-col="exceedClass" data-row="'.$row['tid'].'" value="'.$row['exceedClass'].'"></td>';
 					echo '<td class="result" data-col="totalClass"	data-row="'.$row['tid'].'" data-myrow="'.$i.'">'.$row['totalClass'].'</td>';
-					echo '<td><button class="btnBlue_small showToggle">點擊查看</button></td>';
+					echo '<td><button class="btnBlue_small showToggle" data-hopeRow="hopeRow'.$i.'">點擊查看</button></td>';
 					echo '<td><button class="btnBlue_small" id="'.$row['tid'].'" onclick="deleteSurveyInfo(this.id)">刪除</button></td>';
 					echo '<td><input type="checkbox" name="checksurvey[]" value="'.$row['tid'].'" style="width:20px; height:20px;"/></td>';
 					echo '</tr>';
 					
 					//15個意願欄位
-					echo '<tr id="hopeRow'.$i.'"><td colspan="7" style="text-align:center;">';
+					echo '<tr id="hopeRow'.$i.'" style="display:none;"><td colspan="7" style="text-align:center;">';
 					for($j=0; $j<count($hopeNumArray)/5; $j++) {
-						echo '<table id="t01" class="hopeRowArray" style="width:90%;margin:0 auto;table-layout: fixed;">';
+						echo '<table id="t01" class="hopeRowArray purposeTable" style="width:90%;margin:0 auto;table-layout: fixed;">';
 						echo '<tr>';
 						for($k=0; $k<5; $k++) {
-							echo '<th>意願'.$hopeNumArray[$j*5+$k].'</th>';
+							echo '<th style="background-color: #6666B8;color: white;">意願'.$hopeNumArray[$j*5+$k].'</th>';
 						}
 						echo '</tr>';
 						echo '<tr>';
 						for($k=0; $k<5; $k++) {
-							echo '<td class="tdText" data-col="hope'.($j*5+$k+1).'" data-row="'.$row['tid'].'" data-myrow="'.$i.'"><span>'.$row['hope'.($j*5+$k+1)].'</span><input class="modify" data-col="hope'.($j*5+$k+1).'" data-row="'.$row['tid'].'" value="'.$row['hope'.($j*5+$k+1)].'"></td>';
+							echo '<td style="padding: 10px;border: 1px solid #6666B8;background-color: #DDDDFF;" class="tdText" data-col="hope'.($j*5+$k+1).'" data-row="'.$row['tid'].'" data-myrow="'.$i.'"><span>'.$row['hope'.($j*5+$k+1)].'</span><input class="modify" data-col="hope'.($j*5+$k+1).'" data-row="'.$row['tid'].'" value="'.$row['hope'.($j*5+$k+1)].'"></td>';
 						}
 						echo '</tr>';
 						echo '</table>';
@@ -281,19 +281,22 @@ $hopeNumArray=['一', '二', '三', '四', '五', '六', '七', '八', '九', '�
         }
 		
 		
-		
-		document.getElementsByClassName('showToggle')[0].toggle();
+		let showToggleArray=document.getElementsByClassName('showToggle');
+		for(let i=0; i < showToggleArray.length; i++) {
+			showToggleArray[i].toggle();
+		}
 		
 		function objectInit() {
 			Object.prototype.toggle=function() {
 			this.addEventListener('click', function(){
-					if(this.style.display=='block') {
-						this.style.display='none';
+					let Id=this.getAttribute('data-hopeRow');
+					let hopeRowArray=document.getElementById(Id);
+					if(hopeRowArray.style.display=='none') {
+						hopeRowArray.style.display='';
 					} else {
-						this.style.display='block';
+						hopeRowArray.style.display='none';
 					}
 				});
-				
 			}
 		}
 	</script>
