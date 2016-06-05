@@ -63,7 +63,7 @@ for($i=0; $i<$cnt; $i++)
 	else
 		$exceedClass = '是，'.$list['exceedClass'].'&nbsp;節';
 	
-	for($j=1; $j<=5; $j++)
+	for($j=1; $j<=15; $j++)
 	{
 		if($list['hope'.$j]=='無')
 			${"hope".$j} = '<font style="color:#888;">無</font>';
@@ -77,8 +77,7 @@ for($i=0; $i<$cnt; $i++)
 				<tr>
 					<td width="5%" ></td>
 					<td width="90%">
-						<div>
-							<br/>
+							<br/><br/>
 							<span class="title">超鐘點意願調查</span>
 							<br/>
 							<table>
@@ -97,13 +96,13 @@ for($i=0; $i<$cnt; $i++)
 									</td>
 								</tr>
 							</table>
-							<font style="line-height:3px;"><br/></font>
+							<font style="line-height:1px;"><br/></font>
 							
 							教師姓名：'.$list['name'].'<br/>
-							是否願意超鐘點：'.$exceedClass.'<br/>
+							是否願意超鐘點：'.$exceedClass.'
 							
-							<font style="line-height:5px;">
-								<br/>
+							<font style="line-height:3px;">
+								<br/><br/><br/>
 								──────────────────────────────────────────────────────────────────────────────
 								<br/><br/>
 							</font>
@@ -112,7 +111,7 @@ for($i=0; $i<$cnt; $i++)
 							<br/>
 							下列為<u>欲任教科目</u>，標示的順序提供教務處做參考，但因配課因素不一定能全從其意願，敬請見諒。
 							<br/>
-							<font style="line-height:3px;"><br/></font>
+							<font style="line-height:1px;"><br/></font>
 							<table>
 								<tr>
 									<td width="33%" >意願一：'.$hope1.'</td>
@@ -122,12 +121,26 @@ for($i=0; $i<$cnt; $i++)
 								<tr>
 									<td width="33%" >意願四：'.$hope4.'</td>
 									<td width="33%" >意願五：'.$hope5.'</td>
-									<td width="34%" ></td>
+									<td width="34%" >意願六：'.$hope6.'</td>
+								</tr>
+								<tr>
+									<td width="33%" >意願七：'.$hope7.'</td>
+									<td width="33%" >意願八：'.$hope8.'</td>
+									<td width="34%" >意願九：'.$hope9.'</td>
+								</tr>
+								<tr>
+									<td width="33%" >意願十：　'.$hope10.'</td>
+									<td width="33%" >意願十一：'.$hope11.'</td>
+									<td width="34%" >意願十二：'.$hope12.'</td>
+								</tr>
+								<tr>
+									<td width="33%" >意願十三：'.$hope13.'</td>
+									<td width="33%" >意願十四：'.$hope14.'</td>
+									<td width="34%" >意願十五：'.$hope15.'</td>
 								</tr>
 							</table>
-						</div>
 						
-						<div style="text-align:right;">
+						<div style="text-align:right;line-height:5px;">
 							教師簽章：_________________________
 						</div>
 					</td>
@@ -135,7 +148,7 @@ for($i=0; $i<$cnt; $i++)
 				</tr>
 			</table>
 		</div>
-		<font style="line-height:3px;"><br/></font>
+		<font style="line-height:1px;"><br/></font>
 	';
 }
 	
