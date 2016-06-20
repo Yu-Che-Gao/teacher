@@ -34,6 +34,8 @@ require_once("./mysql_connect.inc.php");
 		$sql_admin = " update admin_info set password =('".mysql_real_escape_string($password)."') where email='$email' ";	
 		mysql_query($sql_admin);
 		
+		
+		  
 		/* 寄信 */
 		// 一次查多張表
 		$list = mysql_fetch_array(mysql_query(" select * from admin_info where (email='$email') "));
@@ -48,19 +50,19 @@ require_once("./mysql_connect.inc.php");
 		'Reply-To:' .mysql_real_escape_string('nemocandy5@gmail.com') ."\r\n" .
 		'X-Mailer: PHP/' .phpversion();
 		
-		if (mail($to, $subject, $message, $headers))
-		{	?>
-			<script>
+		if (mail("$to", "$subject", "$message", "$headers")):
+			?>
+			 <script>
 				popup_modal_alert("success","送出成功!<br>請至您的信箱收信!","./login.php");
-			</script>
-			<?php
-		}
-		else
-		{	?>
-			<script>
+			 </script>
+			 <?php
+		
+		else:
+			?>
+			 <script>
 				popup_modal_alert("error","帳號錯誤，無法寄送E-mail !","javascript: history.back()");
-			</script>
-			<?php
-		}
+			 </script>
+			 <?php
+		endif;
 	}
 ?>

@@ -16,6 +16,26 @@ $hopeNumArray=['一', '二', '三', '四', '五', '六', '七', '八', '九', '�
 	<link rel="stylesheet" type="text/css" href="../css/styles_login.css"/>
 	<link rel="stylesheet" type="text/css" href="../css/styles_modal.css"/>
 	<link rel="stylesheet" type="text/css" href="../css/styles_survey.css"/>
+	<style>
+	/*.purposeTable {
+		width: 90%;
+		float: left; 
+		margin: 0 20px 20px 0;
+		border: 1px solid #6666B8;
+		border-collapse: collapse;
+	}
+	.purposeTable th {
+		height: 40px;
+		background-color: #6666B8;
+		color: white;
+	}
+	.purposeTable td {
+		padding: 10px;
+		border: 1px solid #6666B8;
+		background-color: #DDDDFF;
+		text-align: center;
+	}*/
+	</style>
 </head>
 
 <body>
@@ -31,7 +51,7 @@ $hopeNumArray=['一', '二', '三', '四', '五', '六', '七', '八', '九', '�
 	
 	<div style="border:2px #ccc solid; padding:20px;">
 		<?php
-		$teacherName = '<option value="無">---尚未選擇---</option>';
+		$teacherName = '<option value="none">---尚未選擇---</option>';
 		$result = mysql_query("SELECT * FROM teacher_info");
 		while($list = mysql_fetch_array($result))
 		{
@@ -39,7 +59,7 @@ $hopeNumArray=['一', '二', '三', '四', '五', '六', '七', '八', '九', '�
 		}
 		
 		$subject = '
-			<option value="無">---尚未選擇---</option>
+			<option value="none">---尚未選擇---</option>
 			<option>國語			</option> <option>閱讀		</option> <option>數學</option>
 			<option>彈性時間		</option> <option>綜合活動	</option> <option>社會</option>
 			<option>自然與生活科技	</option> <option>生活		</option> <option>音樂</option>

@@ -65,8 +65,8 @@ for($i=0; $i<$cnt; $i++)
 	
 	for($j=1; $j<=15; $j++)
 	{
-		if($list['hope'.$j]=='無')
-			${"hope".$j} = '<font style="color:#888;">無</font>';
+		if($list['hope'.$j]=='none')
+			${"hope".$j} = '<font style="color:#888;">none</font>';
 		else
 			${"hope".$j} = '<u>'.$list['hope'.$j].'</u>';
 	}
@@ -98,7 +98,9 @@ for($i=0; $i<$cnt; $i++)
 							</table>
 							<font style="line-height:1px;"><br/></font>
 							
-							教師姓名：'.$list['name'].'<br/>
+							教師姓名：<u>'.$list['name'].'</u>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							是否願意超鐘點：'.$exceedClass.'
 							
 							<font style="line-height:3px;">
@@ -140,7 +142,7 @@ for($i=0; $i<$cnt; $i++)
 								</tr>
 							</table>
 						
-						<div style="text-align:right;line-height:5px;">
+						<div style="text-align:right;line-height:8px;">
 							教師簽章：_________________________
 						</div>
 					</td>
