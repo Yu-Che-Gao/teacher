@@ -97,6 +97,10 @@ $hopeNumArray=['一', '二', '三', '四', '五', '六', '七', '八', '九', '�
 			<div class="convertPDFbtn">
 				<img src="../image/pdf_icon.png" title="轉存PDF檔案" class="setImg" onclick="convertPDF();"/>
 			</div>
+			
+			<div class="exportEXCELbtn">
+				<img src="../image/excel_icon.png" title="匯出EXCEL總表" class="setImg" onclick="self.location.href='./export_excel.php'"/>
+			</div>
 			<br/><br/><br/><br/>
 		</div>
 		

@@ -17,17 +17,30 @@
         if($row['Comment']!='教師流水編號') {
             echo '<th>'.$row['Comment'].'</th>';
             $schema[]=$row['Field'];
-        }
+        } else {
+			echo '<th>教師姓名</th>';
+			$schema[]='tid';
+		}
     }
     echo '</tr>';
     
     $result=mysql_query("SELECT * FROM survey");
+	$rowCount=1;
     while($row=mysql_fetch_array($result, MYSQL_ASSOC)) {
         echo '<tr>';
-        for($i=0; $i<count($row)-1; $i++) {
-            echo '<td>'.$row[$schema[$i]].'</td>';
+        for($i=0; $i<count($row); $i++) {
+			if($schema[$i]=='tid') {
+				$result2=mysql_query("SELECT * FROM `teacher_info` WHERE `tid`=".$row['tid']);
+				$row2=mysql_fetch_array($result2, MYSQL_ASSOC);
+				echo '<td>'.$row2['name'].'</td>';
+			} else if($schema[$i]=='sid') {
+				echo '<td>'.$rowCount.'</td>';
+			} else {
+				echo '<td>'.$row[$schema[$i]].'</td>';
+			}
         }
         echo '</tr>';
+		$rowCount++;
     }
 
     echo '</table>';

@@ -29,18 +29,23 @@
 
 .addSurvey {
 	position: absolute;
-	right: 100px;
+	right: 120px;
 }
 
 .convertPDFbtn {
 	position: absolute;
-	right: 40px;
+	right: 60px;
+	cursor: pointer;
+}
+.exportEXCELbtn {
+	position: absolute;
+	right: 10px;
 	cursor: pointer;
 }
 
 .setImg {
-	width:  40px;
-	height: 40px;
+	width:  50px;
+	height: 50px;
 }
 
 /* 新增表格
